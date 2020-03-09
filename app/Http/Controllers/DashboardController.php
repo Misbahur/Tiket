@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\laporan;
+use App\dashboard;
 use Illuminate\Http\Request;
 
-class LaporanController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class LaporanController extends Controller
     public function index()
     {
         //
-        return view('laporan');
+        return view('dashboard');
     }
 
     /**
@@ -42,10 +42,10 @@ class LaporanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\laporan  $laporan
+     * @param  \App\dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function show(laporan $laporan)
+    public function show(dashboard $dashboard)
     {
         //
     }
@@ -53,10 +53,10 @@ class LaporanController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\laporan  $laporan
+     * @param  \App\dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function edit(laporan $laporan)
+    public function edit(dashboard $dashboard)
     {
         //
     }
@@ -65,10 +65,10 @@ class LaporanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\laporan  $laporan
+     * @param  \App\dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, laporan $laporan)
+    public function update(Request $request, dashboard $dashboard)
     {
         //
     }
@@ -76,10 +76,10 @@ class LaporanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\laporan  $laporan
+     * @param  \App\dashboard  $dashboard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(laporan $laporan)
+    public function destroy(dashboard $dashboard)
     {
         //
     }
