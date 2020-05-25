@@ -20,3 +20,6 @@ Route::get('/coba', 'coba@index');
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/kategori', 'KategoriController@index');
 Route::get('/laporan', 'LaporanController@index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
