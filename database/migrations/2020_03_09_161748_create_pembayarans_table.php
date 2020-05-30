@@ -14,7 +14,9 @@ class CreatePembayaransTable extends Migration
     public function up()
     {
         Schema::create('pembayarans', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->integer('jumlah_bayar');
+            $table->enum('status_bayar',['belum','sudah']);
             $table->timestamps();
         });
     }
