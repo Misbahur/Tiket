@@ -3135,6 +3135,19 @@ section.content {
 .info-box.hover-expand-effect:hover:after {
   width: 100%; }
 
+.info-box .tombol{
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 80px; 
+}
+.info-box .tombol i{
+  color: #fff;
+  font-size: 50px;
+  line-height: 80px;
+}
+
 .info-box-2 {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   height: 80px;
