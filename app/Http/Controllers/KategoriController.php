@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\kategori;
+use App\asuransi;
 use Illuminate\Http\Request;
 
 class KategoriController extends Controller
@@ -14,8 +15,11 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        //
-        return view('kategori');
+        //return view('kategori');
+        $kategori = kategori::latest()->paginate(7);
+
+        return view('KategoriTiket.index',compact('kategori'))
+        ->with('i',(request()->input('page', 1) - 1) * 7);
     }
 
     /**
@@ -26,6 +30,8 @@ class KategoriController extends Controller
     public function create()
     {
         //
+        $asuransi = asuransi::all();
+        return view('KategoriTiket.add', compact('asuransi'));
     }
 
     /**
@@ -37,6 +43,16 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'kode'=> 'required',
+            'nama'=> 'required',
+            'harga'=> 'required',
+            'kategori_hari'=> 'required',
+        ]);
+        kategori::create($request->all());
+
+        return redirect()->route('kategori.index')
+        ->with('Success','Kategori created successfully.');
     }
 
     /**
@@ -48,6 +64,7 @@ class KategoriController extends Controller
     public function show(kategori $kategori)
     {
         //
+        return view('KategoriTiket.show',compact('kategori'));
     }
 
     /**
@@ -58,7 +75,8 @@ class KategoriController extends Controller
      */
     public function edit(kategori $kategori)
     {
-        //
+        $asuransi = asuransi::all();
+        return view('KategoriTiket.edit',compact('kategori','asuransi'));
     }
 
     /**
@@ -71,6 +89,16 @@ class KategoriController extends Controller
     public function update(Request $request, kategori $kategori)
     {
         //
+        $request->validate([
+            'nama'=> 'required',
+            'harga'=> 'required',
+            'kategori_hari'=> 'required',
+        ]);
+
+        $kategori->update($request->all());
+  
+        return redirect()->route('kategori.index')
+        ->with('Success','Kategori updated successfully.');
     }
 
     /**
@@ -82,5 +110,8 @@ class KategoriController extends Controller
     public function destroy(kategori $kategori)
     {
         //
+        $kategori->delete();
+        return redirect()->route('kategori.index')
+        ->with('Success','Kategori delete successfully.');
     }
 }

@@ -15,6 +15,7 @@ class CreateKategorisTable extends Migration
     {
         Schema::create('kategoris', function (Blueprint $table) {
             $table->id('id');
+            $table->string('kode');
             $table->string('nama',25);
             $table->integer('harga');
             $table->enum('kategori_hari',['libur','kerja']);
