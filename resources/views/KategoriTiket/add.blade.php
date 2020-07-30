@@ -4,7 +4,7 @@
 @section('content')
 <div class="container-fluid">
 <div class="block-header">
-    <h2>KATEGORI</h2>
+    <h2>Data Tiket</h2>
     <hr>
 </div>
     <div class="row clearfix">
@@ -15,7 +15,7 @@
                 </div>
                 <div class="body">
                     {{-- <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> --}}
-                    <form action="{{route('kategori.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('datatiket.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row clearfix">
                         <div class="col-sm-12">
@@ -53,15 +53,16 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <select class="form-control show-tick" name="id_asuransi" required>
-                                <option value="">-- Pilih Asuransi --</option>
-                                @foreach ($asuransi as $data)
-                                    <option value="{{$data->id}}">{{$data->nama}}</option>
-                                @endforeach
-                            </select>
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                  <input type="text" class="form-control" name="asuransi" value="{{Request::input("asuransi")}}" required>
+                                  <label class="form-label">Harga Asuransi</label>
+                                </div>
+                                <div class="help-info">Nusantara : 1000 Mancanegara : 5000</div>
+                            </div>
                         </div>
                         <button class="btn btn-primary waves-effect" type="submit">SUBMIT</button>
-                        <a href="{{route('kategori.index')}}" class="btn btn-sm btn-danger mb-2">kembali</a>
+                        <a href="{{route('datatiket.index')}}" class="btn btn-sm btn-danger mb-2">kembali</a>
                         </div>
                     </form>
                 </div>

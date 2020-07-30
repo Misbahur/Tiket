@@ -61,14 +61,6 @@
                             </div>
                             <div class="col-sm-5">
                                 <div class="form-gorup">
-                                    <label class="col-form-label">Konfirmasi Password</label>
-                                    <div class="form-line">
-                                        <input type="password" class="form-control" name="confirm" placeholder="confirm password">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-5">
-                                <div class="form-gorup">
                                     <label class="col-form-label">Level User</label>
                                     <select class="form-control show-tick" name="level_user" required>
                                         <option value="kepala" {{ 'kepala' == $users->level_user? 'selected' : '' }}>Kepala Balai</option>

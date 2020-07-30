@@ -12,6 +12,6 @@ class kategori extends Model
     protected $fillable = ['kode','nama', 'harga', 'kategori_hari','id_asuransi'];
 
     public function transaksi(){
-        return $this->hasmany('App\transaksi','id_kategori');
+        return $this->hasmany('App\transaksi','id_data_tiket');
     }
 }

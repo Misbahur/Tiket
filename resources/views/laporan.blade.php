@@ -1,7 +1,13 @@
 @extends('layouts.master')
-<!-- JQuery DataTable Css -->
-<link href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 @section('content')
+ <!-- Bootstrap DatePicker Css -->
+ <link href="plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+ <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <script src="https://momentjs.com/downloads/moment.js"></script>
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+ <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <div class="container-fluid">
 <div class="block-header">
     <h2>LAPORAN</h2>
@@ -12,7 +18,28 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                        <h3><span class="label label-info">Range Tanggal</span></h3>
+                            {{-- <div class="form-group">
+                                <label>Tgl Awal</label>
+                                <div class="input-group date">
+                                 <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                    <input placeholder="masukkan tanggal Awal" type="text" class="form-control datepicker" name="tgl_awal">
+                                </div>
+                               </div>
+                               <div class="form-group">
+                                <label>Tgl Akhir</label>
+                                <div class="input-group date">
+                                 <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                    <input placeholder="masukkan tanggal Akhir" type="text" class="form-control datepicker" name="tgl_akhir">
+                                </div>
+                               </div> --}}
+                               <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                <span></span> <b class="caret"></b>
+                            </div>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -22,40 +49,25 @@
                                             <th>Nama</th>
                                             <th>Qty Terjual</th>
                                             <th>Total Penjualan</th>
-                                            <th>Asuransi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                         @php
+                                        $semua = 0;
+                                        $total_qty = 0;
+                                         @endphp
+
+                                        @foreach ($data as $item)                                            
                                         <tr>
-                                            <td>Nusantara</td>
-                                            <td>100</td>
-                                            <td>Rp. 1.600.000</td>
-                                            <td>Rp. 160.000</td>
+                                            <td>{{$item->nama_tiket}}</td>
+                                            <td>{{$item->total}}</td>
+                                            <td>{{App\meta_transaksi::total($item->id_data_tiket)}}</td>
+                                            @php
+                                                $total_qty += $item->total;
+                                                $semua = $semua + (int)App\meta_transaksi::total($item->id_data_tiket);
+                                            @endphp
                                         </tr>
-                                        <tr>
-                                            <td>Mancanegara</td>
-                                            <td>100</td>
-                                            <td>Rp. 16.500.000</td>
-                                            <td>Rp. 500.000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Roda 2</td>
-                                            <td>100</td>
-                                            <td>Rp. 500.000</td>
-                                            <td>Rp. 0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Roda 4</td>
-                                            <td>100</td>
-                                            <td>Rp. 1.000.000</td>
-                                            <td>Rp. 0</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Roda 6</td>
-                                            <td>100</td>
-                                            <td>Rp. 5.000.000</td>
-                                            <td>Rp. 0</td>
-                                        </tr>
+                                        @endforeach
                                         <tr>
                                             <td colspan="4"></td>
                                         </tr>
@@ -63,9 +75,8 @@
                                     <tfoot>
                                         <tr>
                                             <th>Total :</th>
-                                            <th>500</th>
-                                            <th>Rp. 24.600.000</th>
-                                            <th>Rp. 660.000</th>
+                                            <th>{{$total_qty}}</th>
+                                        <th>{{$semua}}</th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -76,15 +87,31 @@
             </div>
             <!-- #END# Basic Examples -->
             <div>
-    <script src="js/pages/tables/jquery-datatable.js"></script>
-    <!-- Jquery DataTable Plugin Js -->
-    <script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
-    <script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-    <script src="plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-    <script src="plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-    <script src="plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-    <script src="plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-    <script src="plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-    <script src="plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-    <script src="plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+                <script type="text/javascript">
+                    var start = moment().subtract(29, 'days');
+                    var end = moment();
+
+                    function cb(start, end) {
+                        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                    }
+
+                    $('#reportrange').daterangepicker({
+                        startDate: start,
+                        endDate: end,
+                        ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        }
+                    }, cb);
+
+                    cb(start, end);
+                    </script>
+<!-- Moment Plugin Js -->
+<script src="plugins/momentjs/moment.js"></script>
+<!-- Bootstrap Datepicker Plugin Js -->
+<script src="plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 @endsection

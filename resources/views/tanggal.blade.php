@@ -1,82 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Tiket Elektronik Taman Nasional Baluran</title>
-
-  <!-- css -->
-  <link href="front/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-  <link href="front/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-  <link href="front/fontawesome/css/all.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="front/plugins/cubeportfolio/css/cubeportfolio.min.css">
-  <link href="front/css/nivo-lightbox.css" rel="stylesheet" />
-  <link href="front/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
-  <link href="front/css/owl.carousel.css" rel="stylesheet" media="screen" />
-  <link href="front/css/owl.theme.css" rel="stylesheet" media="screen" />
-  <link href="front/css/animate.css" rel="stylesheet" />
-  <link href="front/css/style.css" rel="stylesheet">
-
-  <!-- boxed bg -->
-  <link id="bodybg" href="front/bodybg/bg1.css" rel="stylesheet" type="text/css" />
-  <!-- template skin -->
-  <link id="t-colors" href="front/color/default.css" rel="stylesheet">
-
-  <!-- =======================================================
-    Theme Name: Medicio
-    Theme URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
-</head>
-
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
-
-
-  <div id="wrapper">
-
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-      <div class="top-area">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6 col-md-6">
-              <p class="bold text-left"></p>
-            </div>
-            <div class="col-sm-6 col-md-6">
-              <p class="bold text-right"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container navigation">
-
-        <div class="navbar-header page-scroll">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-          <a class="navbar-brand" href="index.html">
-                    <img src="front/img/logo.png" alt="" width="150" height="40" />
-                </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="#service">Pembayaran</a></li>
-            <li><a href="panduan">Panduan Pembelian</a></li>
-            <li><a href="{{ route('login') }}">Admin</a></li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container -->
-    </nav>
-
+@extends('layouts.front')
+@section('frontcontent')
+ <style>
+    * {box-sizing: border-box;}
+    ul {list-style-type: none;}
+    body {font-family: Verdana, sans-serif;}
+    
+    .month {
+      padding: 70px 10px;
+      background: #1abc9c;
+      text-align: center;
+    }
+    
+    .month ul {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .month ul li {
+      color: white;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    
+    .month .prev {
+      float: left;
+      padding-top: 10px;
+    }
+    
+    .month .next {
+      float: right;
+      padding-top: 10px;
+    }
+    
+    .weekdays {
+      margin: 0;
+      padding: 10px 0;
+      background-color: #ddd;
+    }
+    
+    .weekdays li {
+      display: inline-block;
+      width: 13.6%;
+      color: #666;
+      text-align: center;
+    }
+    
+    .days {
+      padding: 10px 0;
+      background: #eee;
+      margin: 0;
+    }
+    
+    .days li {
+      list-style-type: none;
+      display: inline-block;
+      width: 13.6%;
+      text-align: center;
+      margin-bottom: 5px;
+      font-size:12px;
+      color: #777;
+    }
+    
+    .days li .active {
+      padding: 5px;
+      background: #1abc9c;
+      color: white !important
+    }
+    
+    /* Add media queries for smaller screens */
+    @media screen and (max-width:720px) {
+      .weekdays li, .days li {width: 13.1%;}
+    }
+    
+    @media screen and (max-width: 420px) {
+      .weekdays li, .days li {width: 12.5%;}
+      .days li .active {padding: 2px;}
+    }
+    
+    @media screen and (max-width: 290px) {
+      .weekdays li, .days li {width: 12.2%;}
+    }
+    </style>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker({                  
+          minDate: moment().add('d', 0).toDate(),
+          maxDate: moment().add('d', +60).toDate(),
+        });
+    } );
+    </script>
     <!-- Section: intro -->
     <section id="intro" class="intro">
       <div class="header-content">
@@ -86,10 +103,10 @@
               <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
               </div>
               <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
-                <h5 class="h-boldw">TIKET ONLINE</h5>
+                <h5 class="h-boldw">TIKET ELEKTRONIK</h5>
               </div>
               <p class="text-left wow bounceIn" data-wow-delay="0.4s">
-                <a href="#" class="director btn-skin btn-lg">Tiket Online <i class="fa fa-angle-right"><i class="text-success">PILIH TANGGAL</i></i></a>
+                <a href="#" class="director btn-skin btn-lg">Tiket Elektronik <i class="fa fa-angle-right"><i class="text-success">PILIH TANGGAL</i></i></a>
               </p>
             </div>
               </div>
@@ -101,99 +118,87 @@
 
     <!-- /Section: intro -->
 
-    <!-- Section: boxes -->
-    <section id="#" class="home-section paddingtop-20">
-            <div class="container-fluid paddingtop-20">
-              <div class="row">
-                  <div class="col-md-5"></div>
-                <div class="col-md-2" style="padding-left: 80px">
-                  <div class="wow fadeInRight" data-wow-delay="0.1s">
-                      <h6 >Bulan / Tahun</h6>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="wow fadeInleft" data-wow-delay="0.1s">
-                    <select style="width: 100%">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-1"></div>
-              </div>
-              <div class="divider-short"></div>
-            </div>
-    </section>
     <!-- /Section: boxes -->
     <section id="#" class="home-section paddingtop-10">
-        <div class="container">
-            <table class="table panel panel-skin" border="1">
-                <thead class="panel-heading">
-                  <tr>
-                    <th scope="col">two</th>
-                    <th scope="col">First</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>hai</td>
-                        <td>
-                            <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked2">
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <a href="pembelian">
-                <button type="button" class="btn btn-primary">Beli Tiket</button>
-            </a>
-        </div>
-    </section>
-
-    <footer>
-      <div class="sub-footer">
-        <div class="container bg--dark">
-          <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <div class="wow fadeInLeft" data-wow-delay="0.1s">
-                <div class="text-left">
-                  <a>&copy;Copyright - OsingTech. All rights reserved.</a>
-                </div>
-              </div>
+      <div class="row">
+        <center>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <form action="{{URL('/pemesanan')}}" method="GET">
+            <div class="input-group">
+              <label>Pilih tanggal</label>
+              <br>
+                <input type="text" id="datepicker" name="tanggal" autocomplete="off">
+              <div class="validation"></div>
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-              <div class="wow fadeInRight" data-wow-delay="0.1s">
-                <div class="text-right">
-                  <div class="credits">
-                    Designed by <a href="https://bootstrap.com/">Bootstrap</a>
-                  </div>
-                </div>
-              </div>
+            <div class="paddingtop-10">
+              <button type="submit" class="btn btn-primary" name="kirim" value="kirim">Pilih Tanggal</button>
             </div>
-          </div>
+          </form>
         </div>
+      </center>
       </div>
-    </footer>
-
-  </div>
-  <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-
-  <!-- Core JavaScript Files -->
-  <script src="front/js/jquery.min.js"></script>
-  <script src="front/js/bootstrap.min.js"></script>
-  <script src="front/js/jquery.easing.min.js"></script>
-  <script src="front/js/wow.min.js"></script>
-  <script src="front/js/jquery.scrollTo.js"></script>
-  <script src="front/js/jquery.appear.js"></script>
-  <script src="front/js/stellar.js"></script>
-  <script src="front/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
-  <script src="front/js/owl.carousel.min.js"></script>
-  <script src="front/js/nivo-lightbox.min.js"></script>
-  <script src="front/js/custom.js"></script>
-
-</body>
-
-</html>
+      <div class="row paddingtop-10">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="body">
+                  <div class="month">      
+                    {{-- <ul>
+                      <li class="prev">&#10094;</li>
+                      <li class="next">&#10095;</li>
+                      <li>
+                        August<br>
+                        <span style="font-size:18px">2017</span>
+                      </li>
+                    </ul> --}}
+                  </div>
+                  
+                  {{-- <ul class="weekdays">
+                    <li>Mo</li>
+                    <li>Tu</li>
+                    <li>We</li>
+                    <li>Th</li>
+                    <li>Fr</li>
+                    <li>Sa</li>
+                    <li>Su</li>
+                  </ul>
+                  
+                  <ul class="days">  
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                    <li><span class="active">10</span></li>
+                    <li>11</li>
+                    <li>12</li>
+                    <li>13</li>
+                    <li>14</li>
+                    <li>15</li>
+                    <li>16</li>
+                    <li>17</li>
+                    <li>18</li>
+                    <li>19</li>
+                    <li>20</li>
+                    <li>21</li>
+                    <li>22</li>
+                    <li>23</li>
+                    <li>24</li>
+                    <li>25</li>
+                    <li>26</li>
+                    <li>27</li>
+                    <li>28</li>
+                    <li>29</li>
+                    <li>30</li>
+                    <li>31</li>
+                  </ul> --}}
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--#END# DateTime Picker -->
+    </section>
+    @endsection

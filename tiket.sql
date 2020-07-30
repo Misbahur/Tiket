@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2020 at 03:50 AM
+-- Generation Time: Jun 20, 2020 at 03:32 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -99,7 +99,12 @@ INSERT INTO `kategoris` (`id`, `kode`, `nama`, `harga`, `kategori_hari`, `id_asu
 (2, 'M', 'Mancanegara', 160000, 'kerja', 2, '2020-06-04 18:45:41', '2020-06-04 18:45:41'),
 (3, 'R2', 'Roda 2', 5000, 'kerja', 3, '2020-06-04 18:47:19', '2020-06-04 18:47:19'),
 (4, 'R4', 'Roda 4', 10000, 'kerja', 3, '2020-06-04 18:47:54', '2020-06-04 18:47:54'),
-(5, 'R6', 'Roda 6', 50000, 'kerja', 3, '2020-06-04 18:48:24', '2020-06-04 18:48:24');
+(5, 'R6', 'Roda 6', 50000, 'kerja', 3, '2020-06-04 18:48:24', '2020-06-04 18:48:24'),
+(6, 'PW', 'Prewedding', 250000, 'kerja', 3, '2020-06-17 01:10:26', '2020-06-17 01:10:26'),
+(7, 'SF', 'Shooting Film', 10000000, 'kerja', 3, '2020-06-17 01:11:15', '2020-06-17 01:11:15'),
+(8, 'VK', 'Video Komersil', 1000000, 'kerja', 3, '2020-06-17 01:11:56', '2020-06-17 01:11:56'),
+(9, 'NL', 'Nusantara Libur', 17500, 'libur', 1, '2020-06-17 01:20:51', '2020-06-17 21:11:50'),
+(10, 'ML', 'Mancanegara Libur', 240000, 'libur', 2, '2020-06-17 01:21:35', '2020-06-17 01:21:35');
 
 -- --------------------------------------------------------
 
@@ -329,7 +334,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kategoris`
 --
 ALTER TABLE `kategoris`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `laporans`

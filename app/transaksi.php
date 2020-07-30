@@ -7,13 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class transaksi extends Model
 {
     //
+    protected $fillable = [
+        'tanggal_berkunjung', 'status_transaksi', 'id_user','barcode','image',
+    ];
     protected $table = 'transaksis';
     protected $primaryKey = 'id';
 
-    public function asuransi(){
-        // return $this->belongsTo('App\asuransi');
-        return $this->belongsTo('App\asuransi','id','id_asuransi');
-    }
     public function pembayaran(){
         return $this->belongsTo('App\pembayaran', 'id');
     }

@@ -13,16 +13,8 @@ class CreateKategorisTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategoris', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('kode');
-            $table->string('nama',25);
-            $table->integer('harga');
-            $table->enum('kategori_hari',['libur','kerja']);
-            $table->BigInteger('id_asuransi')->unsigned();
-             //foreign asuransi on migration create foreign keys kategoris
-            $table->timestamps();
-        });
+        Schema::dropIfExists('kategoris');
+        
     }
 
     /**
@@ -32,6 +24,16 @@ class CreateKategorisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategoris');
+        Schema::create('kategoris', function (Blueprint $table) {
+            Schema::dropIfExists('kategoris');
+            $table->id('id');
+            $table->string('kode');
+            $table->string('nama',25);
+            $table->integer('harga');
+            $table->enum('kategori_hari',['libur','kerja']);
+            $table->integer('asuransi');
+             //foreign asuransi on migration create foreign keys kategoris
+            $table->timestamps();
+        });
     }
 }

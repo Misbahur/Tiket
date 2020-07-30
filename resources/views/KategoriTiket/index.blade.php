@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid">
 <div class="block-header">
-    <h2>KATEGORI</h2>
+    <h2>Data Tiket</h2>
     <hr>
 </div>
 <!-- Basic Examples -->
@@ -24,20 +24,22 @@
                                             <th>Nama</th>
                                             <th>Harga</th>
                                             <th>Kategori Hari</th>
+                                            <th>Asuransi</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($kategori as $data)
+                                    @foreach($datatiket as $data)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{$data->kode}}</td>
                                             <td>{{$data->nama}}</td>
                                             <td>{{$data->harga}}</td>
                                             <td>{{$data->kategori_hari}}</td>
+                                            <td>{{$data->asuransi}}</td>
                                             <td>
-                                            <form action="{{ route('kategori.destroy',$data->id) }}" method="POST">
-                                                <a class="btn btn-info btn-sm" href="{{ route('kategori.edit',$data->id) }}">
+                                            <form action="{{ route('datatiket.destroy',$data->id) }}" method="POST">
+                                                <a class="btn btn-info btn-sm" href="{{ route('datatiket.edit',$data->id) }}">
                                                 <i class="fas fa-pencil-alt"></i>
                                                 Edit
                                                 </a>
@@ -53,7 +55,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                <a href="{{url('kategori/create')}}" class="btn btn-primary">Add New</a>
+                                <a href="{{url('datatiket/create')}}" class="btn btn-primary">Add New</a>
                             </div>
                         </div>
                     </div>

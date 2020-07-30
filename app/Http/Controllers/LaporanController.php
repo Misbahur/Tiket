@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\laporan;
+
 use Illuminate\Http\Request;
+use App\laporan;
+use App\data_tiket;
+use App\transaksi;
+use App\meta_transaksi;
+use DB;
 
 class LaporanController extends Controller
 {
@@ -15,7 +20,12 @@ class LaporanController extends Controller
     public function index()
     {
         //
-        return view('laporan');
+        $data = meta_transaksi::
+        join('data_tikets', 'data_tikets.id' ,'=', 'meta_transaksis.id_data_tiket')
+        ->select('data_tikets.nama as nama_tiket',DB::raw('sum(jumlah_tiket) as total, meta_transaksis.id_data_tiket'))
+        ->groupBy('id_data_tiket')
+        ->get();
+        return view('laporan', compact('data'));
     }
 
     /**

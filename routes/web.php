@@ -26,22 +26,40 @@ Route::get('/peraturan', function () {
 Route::get('/tanggal', function(){
     return view('tanggal');
 });
-Route::get('/pembelian', function(){
-    return view('pembelian');
-});
+Route::get('status', 'TransaksiOnlineController@edit')->name('status');
+Route::POST('/buktiup','TransaksiOnlineController@update')->name('buktiup');
+Route::get('/pemesanan','PemesananController@create');
+Route::post('/otransaksi', 'TransaksiOnlineController@store');
 
-//admin
-Route::get('/coba', 'coba@index');
-Route::get('/dashboard', 'DashboardController@index');
-//Route::get('/kategori', 'KategoriController@index');
-Route::get('/laporan', 'LaporanController@index');
+Route::get('/wilayah/{provinsi}','WilayahController@kota');
+//Route::get('/home', 'HomeController@index')->name('home');
 
-//admin>controller
-Route::resource('kategori','KategoriController');
-Route::resource('users','UserController');
-Route::resource('offline','TransaksiController');
 
 //auth
 Auth::routes();
+Route::resource('dashboard', 'DashboardController');
+// Route::resource('laporan', 'LaporanController');
+// Route::resource('offline','TransaksiController');
+// Route::resource('datatiket','DataTiketController');
+// Route::resource('users','UserController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::group(['middleware'=>['auth','roleuser:kepala']],function(){
+// //admin>controller
+// Route::resource('laporan', 'LaporanController');
+// });
+Route::group(['middleware'=>['auth','roleuser:petugas,koordinator,kepala']],function(){
+    //admin>controller
+    Route::resource('laporan', 'LaporanController');
+    });
+
+Route::group(['middleware'=>['auth','roleuser:petugas,koordinator']],function(){
+//admin>controller
+Route::resource('offline','TransaksiController');
+Route::resource('online', 'TransaksiOnlineController');
+});
+
+Route::group(['middleware'=>['auth','roleuser:it']],function(){
+//admin>controller
+Route::resource('datatiket','DataTiketController');
+Route::resource('users','UserController');
+});

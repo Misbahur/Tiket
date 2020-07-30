@@ -1046,7 +1046,8 @@ Elements
 	display: inline-block;
 	color: #fff;
 	width: 1.6em;
-    height: 1.6em;
+	height: 1.6em;
+	margin: 0 auto;
 	text-align: center;
 	line-height: 1.6em;
 }

@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Welcome Tiket Elektronik Taman Nasional Baluran</title>
     <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -30,6 +30,10 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ asset('css/themes/all-themes.css') }}" rel="stylesheet" />
+    <script src="{{ asset('js/vue.js') }}"></script>
+    <script src="https://kit.fontawesome.com/ed817095f7.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body class="theme-cyan">
@@ -89,17 +93,20 @@
                     <img src="{{ asset ('images/user.png') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kepala Balai</div>
-                    <div class="email">Admin@TNBaluran.com</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->fullname }}</div>
+                    <div class="email">{{ Auth::user()->email }}</div>
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
                             <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 </div>
             </div>
             <!-- #User Info -->
@@ -108,19 +115,19 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="activ">
-                        <a href="/dashboard">
+                    <a href="{{url('/dashboard')}}">
                             <i class="material-icons">dashboard</i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/kategori">
+                        <a href="{{url('/datatiket')}}">
                             <i class="material-icons">menu</i>
-                            <span>Kategori</span>
+                            <span>Data Tiket</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/laporan">
+                        <a href="{{url('/laporan')}}">
                             <i class="material-icons">description</i>
                             <span>Laporan</span>
                         </a>
@@ -132,13 +139,13 @@
                         </a>
                         <ul class="ml-menu">
                             <li>
-                                <a href="javascript:void(0);">
+                                <a href="{{('/online')}}">
                                 <i class="material-icons">credit_card</i>
                                     <span>Online</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="offline">
+                                <a href="{{url('/offline')}}">
                                 <i class="material-icons">shopping_cart</i>
                                     <span>Offline</span>
                                 </a>
@@ -146,7 +153,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="users">
+                        <a href="{{url('/users')}}">
                             <i class="material-icons">accessibility</i>
                             <span>Users</span>
                         </a>
@@ -290,11 +297,11 @@
     <script src="{{ asset('plugins/chartjs/Chart.bundle.js') }}"></script>
 
     <!-- Flot Charts Plugin Js -->
-    <script src="{{ asset('plugins/flot-charts/jquery.flot.js') }}"></script>
+    {{-- <script src="{{ asset('plugins/flot-charts/jquery.flot.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.resize.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.pie.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.categories.js') }}"></script>
-    <script src="{{ asset('plugins/flot-charts/jquery.flot.time.js') }}"></script>
+    <script src="{{ asset('plugins/flot-charts/jquery.flot.time.js') }}"></script> --}}
 
     <!-- Sparkline Chart Plugin Js -->
     <script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
