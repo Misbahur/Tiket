@@ -18,28 +18,24 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            {{-- <div class="form-group">
-                                <label>Tgl Awal</label>
-                                <div class="input-group date">
-                                 <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-th"></span>
-                                    </div>
-                                    <input placeholder="masukkan tanggal Awal" type="text" class="form-control datepicker" name="tgl_awal">
-                                </div>
-                               </div>
-                               <div class="form-group">
-                                <label>Tgl Akhir</label>
-                                <div class="input-group date">
-                                 <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-th"></span>
-                                    </div>
-                                    <input placeholder="masukkan tanggal Akhir" type="text" class="form-control datepicker" name="tgl_akhir">
-                                </div>
-                               </div> --}}
-                               <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-                                <span></span> <b class="caret"></b>
-                            </div>
+                            <form id="getDate" action="{{ url('laporan') }}" method="GET">
+                            <table>
+                                <tr>
+                                    <th>Range Tanggal</th>
+                                    <td style="padding-left: 10px;">
+                                        <div id="reportrange" class="pull-center form-control" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                            <span></span> <b class="caret"></b>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left: 10px;">
+                                        <button type="submit" class="btn btn-primary waves-effect" id="submit">
+                                            <i class="material-icons">search</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -92,7 +88,7 @@
                     var end = moment();
 
                     function cb(start, end) {
-                        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                        $('#reportrange span').html(start.format('D MMMM YYYY') + ' - ' + end.format('D MMMM YYYY'));
                     }
 
                     $('#reportrange').daterangepicker({
@@ -109,6 +105,10 @@
                     }, cb);
 
                     cb(start, end);
+                    $('.applyBtn').click(function(){
+                        console.log(start.format('D MMMM YYYY') + ' - ' + end.format('D MMMM YYYY'));
+                    });
+                    
                     </script>
 <!-- Moment Plugin Js -->
 <script src="plugins/momentjs/moment.js"></script>

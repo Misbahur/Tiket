@@ -17,7 +17,7 @@ class LaporanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $data = meta_transaksi::
@@ -25,6 +25,7 @@ class LaporanController extends Controller
         ->select('data_tikets.nama as nama_tiket',DB::raw('sum(jumlah_tiket) as total, meta_transaksis.id_data_tiket'))
         ->groupBy('id_data_tiket')
         ->get();
+        
         return view('laporan', compact('data'));
     }
 
