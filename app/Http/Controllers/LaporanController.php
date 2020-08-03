@@ -9,6 +9,8 @@ use App\data_tiket;
 use App\transaksi;
 use App\meta_transaksi;
 use DB;
+use PDF;
+use Excel;
 
 class LaporanController extends Controller
 {
@@ -20,13 +22,21 @@ class LaporanController extends Controller
     public function index(Request $request)
     {
         //
+        
         $data = meta_transaksi::
         join('data_tikets', 'data_tikets.id' ,'=', 'meta_transaksis.id_data_tiket')
         ->select('data_tikets.nama as nama_tiket',DB::raw('sum(jumlah_tiket) as total, meta_transaksis.id_data_tiket'))
-        ->groupBy('id_data_tiket')
-        ->get();
-        
-        return view('laporan', compact('data'));
+        ->groupBy('id_data_tiket');
+
+        if($request->startDate != ''){
+            $data = $data->whereDate('meta_transaksis.created_at','>=',$request->startDate);        
+        }
+        if($request->endDate != ''){
+            $data = $data->whereDate('meta_transaksis.created_at','<=',$request->endDate);        
+        }
+        $data = $data->orderBy('meta_transaksis.created_at','desc')
+        ->paginate(10);
+        return view('laporan', ['datas' => $data->appends(['startDate' => $request->startDate,'endDate' => $request->endDate])]);
     }
 
     /**
@@ -93,5 +103,50 @@ class LaporanController extends Controller
     public function destroy(laporan $laporan)
     {
         //
+    }
+
+    public function getPDF(Request $request)
+    {
+        # code...
+        
+        $data = meta_transaksi::
+        join('data_tikets', 'data_tikets.id' ,'=', 'meta_transaksis.id_data_tiket')
+        ->select('data_tikets.nama as nama_tiket',DB::raw('sum(jumlah_tiket) as total, meta_transaksis.id_data_tiket'))
+        ->groupBy('id_data_tiket');
+        
+        if($request->startDate != ''){
+            $data = $data->whereDate('meta_transaksis.created_at','>=',$request->startDate);        
+        }
+        if($request->endDate != ''){
+            $data = $data->whereDate('meta_transaksis.created_at','<=',$request->endDate);        
+        }
+        $data = $data->orderBy('meta_transaksis.created_at','desc')
+        ->paginate(10);
+        $start = date("d F Y", strtotime($request->startDate));
+        $end = date("d F Y", strtotime($request->endDate));
+        $pdf = PDF::loadview('laporancetak', ['datas' => $data->appends(['startDate' => $request->startDate,'endDate' => $request->endDate]), 'startDate' => $start,'endDate' => $end]);
+        return $pdf->stream();
+    }
+    public function getCSV(Request $request)
+    {
+        # code...
+        
+        $data = meta_transaksi::
+        join('data_tikets', 'data_tikets.id' ,'=', 'meta_transaksis.id_data_tiket')
+        ->select('data_tikets.nama as nama_tiket',DB::raw('sum(jumlah_tiket) as total, meta_transaksis.id_data_tiket'))
+        ->groupBy('id_data_tiket');
+        
+        if($request->startDate != ''){
+            $data = $data->whereDate('meta_transaksis.created_at','>=',$request->startDate);        
+        }
+        if($request->endDate != ''){
+            $data = $data->whereDate('meta_transaksis.created_at','<=',$request->endDate);        
+        }
+        $data = $data->orderBy('meta_transaksis.created_at','desc')
+        ->paginate(10);
+        $start = date("d F Y", strtotime($request->startDate));
+        $end = date("d F Y", strtotime($request->endDate));
+        $csv = Excel::loadview('laporancetak', ['datas' => $data->appends(['startDate' => $request->startDate,'endDate' => $request->endDate]), 'startDate' => $start,'endDate' => $end]);
+        return $csv->download('siswa.xlsx');
     }
 }

@@ -50,6 +50,8 @@ Route::resource('dashboard', 'DashboardController');
 Route::group(['middleware'=>['auth','roleuser:petugas,koordinator,kepala']],function(){
     //admin>controller
     Route::resource('laporan', 'LaporanController');
+    Route::get('pdf', 'LaporanController@getPDF')->name('getPDF');
+    Route::get('csv', 'LaporanController@getCSV')->name('getCSV');
     });
 
 Route::group(['middleware'=>['auth','roleuser:petugas,koordinator']],function(){

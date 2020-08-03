@@ -9,7 +9,7 @@ class meta_transaksi extends Model
 {
     //
     protected $fillable = [
-        'jumlah_tiket', 'id_transaksi', 'harga','id_data_tiket',
+        'jumlah_tiket', 'id_transaksi', 'harga','id_data_tiket','created_at'
     ];
     protected $table = 'meta_transaksis';
     protected $primaryKey = 'id';

@@ -21,10 +21,10 @@ class TransaksiController extends Controller
     {
         //
         
-        $offline = data_tiket::orderBy('id', 'ASC')->paginate(6);
+        $offline = data_tiket::orderBy('id', 'ASC')->paginate(12);
 
         return view('offline.index',compact('offline'))
-        ->with('i',(request()->input('page', 1) - 1) * 6);
+        ->with('i',(request()->input('page', 1) - 1) * 12);
         //return view('offline.index');
     }
 
@@ -47,6 +47,8 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
+
+        dd($request->all());
         //
         $cekTiket = transaksi::whereDate('tanggal_berkunjung',date("Y-m-d",strtotime($request->tanggal)))->count();
         $cekTiket = $cekTiket+1;

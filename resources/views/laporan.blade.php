@@ -14,24 +14,41 @@
     <hr>
 </div>
 <!-- Basic Examples -->
-            <div class="row clearfix">
+            <div class="row clearfix" id="app1">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <form id="getDate" action="{{ url('laporan') }}" method="GET">
                             <table>
                                 <tr>
-                                    <th>Range Tanggal</th>
-                                    <td style="padding-left: 10px;">
+                                    <th style="width: 15%">Range Tanggal</th>
+                                    <td style="width: 35%">
                                         <div id="reportrange" class="pull-center form-control" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                                             <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
                                             <span></span> <b class="caret"></b>
+                                            
                                         </div>
                                     </td>
-                                    <td style="padding-left: 10px;">
+                                    <td style="width: 25%; padding-left: 10px;">
+                                        
+                                        <input type="hidden" value="" name="startDate" />
+                                        <input type="hidden" value="" name="endDate" />
                                         <button type="submit" class="btn btn-primary waves-effect" id="submit">
                                             <i class="material-icons">search</i>
                                         </button>
+                                    </td>
+                                    <td style="padding-left: 200px">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn bg-amber dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                <i class="material-icons">print</i>
+                                                <span class="caret"></span>
+
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a id="cetakpdf" class="waves-effect btn btn-primary" type="button">PDF</a></li>
+                                                <li><a id="exportexcel" class="waves-effect btn btn-success">EXCEL</a></li>
+                                            </ul>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
@@ -53,7 +70,7 @@
                                         $total_qty = 0;
                                          @endphp
 
-                                        @foreach ($data as $item)                                            
+                                        @foreach ($datas as $item)                                            
                                         <tr>
                                             <td>{{$item->nama_tiket}}</td>
                                             <td>{{$item->total}}</td>
@@ -84,11 +101,24 @@
             <!-- #END# Basic Examples -->
             <div>
                 <script type="text/javascript">
-                    var start = moment().subtract(29, 'days');
+                    var start = moment();
                     var end = moment();
-
-                    function cb(start, end) {
+                    var startDate = getUrlParameter('startDate');
+                    var endDate = getUrlParameter('endDate');
+                    console.log(start);
+                
+                if (startDate == null && endDate == null){
+                    start = moment();
+                    end = moment();
+                }
+                else {  
+                    start = moment(new Date(String(startDate)));
+                    end = moment(new Date(String(endDate)));
+                }
+                   function cb(start, end) {
                         $('#reportrange span').html(start.format('D MMMM YYYY') + ' - ' + end.format('D MMMM YYYY'));
+                        document.getElementsByName('startDate')[0].value = start.format('YYYY-MM-DD');
+                        document.getElementsByName('endDate')[0].value = end.format('YYYY-MM-DD');
                     }
 
                     $('#reportrange').daterangepicker({
@@ -104,14 +134,36 @@
                         }
                     }, cb);
 
-                    cb(start, end);
-                    $('.applyBtn').click(function(){
-                        console.log(start.format('D MMMM YYYY') + ' - ' + end.format('D MMMM YYYY'));
-                    });
-                    
+                    cb(start, end);  
+                   function getUrlParameter(sParam) {
+                    var sPageURL = window.location.search.substring(1),
+                        sURLVariables = sPageURL.split('&'),
+                        sParameterName,
+                        i;
+
+                    for (i = 0; i < sURLVariables.length; i++) {
+                        sParameterName = sURLVariables[i].split('=');
+
+                        if (sParameterName[0] === sParam) {
+                            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                        }
+                    }
+                };
+                    document.getElementById('cetakpdf').addEventListener('click', function(){
+                        let dateRange = "?startDate=" + String(start.format('YYYY-MM-DD')) + "&endDate=" + String(end.format('YYYY-MM-DD'));
+
+                        location.href = "{{ route ('getPDF')}}" + dateRange;
+                        // console.log(start.format('YYYY-MM-DD'));
+                        // location.href="{{route ('getPDF')}}"+dateRange;
+                    })
+                    document.getElementById('exportexcel').addEventListener('click', function(){
+                        let dateRange = "?startDate=" + String(start.format('YYYY-MM-DD')) + "&endDate=" + String(end.format('YYYY-MM-DD'));
+
+                        location.href = "{{ route ('getCSV')}}" + dateRange;
+                        // console.log(start.format('YYYY-MM-DD'));
+                        // location.href="{{route ('getPDF')}}"+dateRange;
+                    })
                     </script>
-<!-- Moment Plugin Js -->
-<script src="plugins/momentjs/moment.js"></script>
-<!-- Bootstrap Datepicker Plugin Js -->
-<script src="plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+                   
+
 @endsection
