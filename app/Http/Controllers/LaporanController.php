@@ -8,9 +8,11 @@ use App\laporan;
 use App\data_tiket;
 use App\transaksi;
 use App\meta_transaksi;
+use App\Exports\ExportLaporans;
+use Maatwebsite\Excel\Facades\Excel;
 use DB;
 use PDF;
-use Excel;
+
 
 class LaporanController extends Controller
 {
@@ -142,11 +144,11 @@ class LaporanController extends Controller
         if($request->endDate != ''){
             $data = $data->whereDate('meta_transaksis.created_at','<=',$request->endDate);        
         }
-        $data = $data->orderBy('meta_transaksis.created_at','desc')
-        ->paginate(10);
+        $data = $data->orderBy('meta_transaksis.created_at','desc')->get();
         $start = date("d F Y", strtotime($request->startDate));
         $end = date("d F Y", strtotime($request->endDate));
-        $csv = Excel::loadview('laporancetak', ['datas' => $data->appends(['startDate' => $request->startDate,'endDate' => $request->endDate]), 'startDate' => $start,'endDate' => $end]);
-        return $csv->download('siswa.xlsx');
+        $filename = 'Laporan'.$start.'-'.$end.'.xlsx';
+        return Excel::download(new ExportLaporans($data, $start, $end), $filename);
+        
     }
 }

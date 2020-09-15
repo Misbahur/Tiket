@@ -69,7 +69,7 @@
                                     $total += $item->harga_tiket * $item->jumlah_tiket;  
                                 @endphp
                             @endforeach
-                                <td>{{$total}}</td>
+                                <td>Rp.{{number_format($total)}}</td>
                             </tr>
                         </tbody>
                     </table>

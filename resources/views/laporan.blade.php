@@ -74,7 +74,7 @@
                                         <tr>
                                             <td>{{$item->nama_tiket}}</td>
                                             <td>{{$item->total}}</td>
-                                            <td>{{App\meta_transaksi::total($item->id_data_tiket)}}</td>
+                                            <td>Rp.{{number_format(App\meta_transaksi::total($item->id_data_tiket))}}</td>
                                             @php
                                                 $total_qty += $item->total;
                                                 $semua = $semua + (int)App\meta_transaksi::total($item->id_data_tiket);
@@ -89,7 +89,7 @@
                                         <tr>
                                             <th>Total :</th>
                                             <th>{{$total_qty}}</th>
-                                        <th>{{$semua}}</th>
+                                        <th>Rp.{{number_format($semua)}}</th>
                                         </tr>
                                     </tfoot>
                                 </table>

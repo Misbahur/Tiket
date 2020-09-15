@@ -191,8 +191,7 @@ class TransaksiOnlineController extends Controller
         'transaksis.created_at as tanggal_transaksi',
         'transaksis.image as image',
         'wisatawans.nama as nama_ketua',
-        'wisatawans.negara as kebangsaan_ketua',
-        )
+        'wisatawans.negara as kebangsaan_ketua')
         ->where('id_transaksi', $id_transaksi)
         ->get();
 
@@ -200,8 +199,7 @@ class TransaksiOnlineController extends Controller
         ->Join('transaksis', 'transaksis.id', '=', 'meta_transaksis.id_transaksi')
         ->Join('wisatawan_wnis', 'meta_transaksis.id', '=', 'wisatawan_wnis.id_transaksi_meta')
         ->select('meta_transaksis.*', 
-        'wisatawan_wnis.nama as nama_wni',
-        )
+        'wisatawan_wnis.nama as nama_wni')
         ->where('id_transaksi', $id_transaksi)
         ->get();
 
@@ -209,8 +207,7 @@ class TransaksiOnlineController extends Controller
         ->Join('transaksis', 'transaksis.id', '=', 'meta_transaksis.id_transaksi')
         ->Join('wisatawan_wnas', 'meta_transaksis.id', '=', 'wisatawan_wnas.id_transaksi_meta')
         ->select('meta_transaksis.*', 
-        'wisatawan_wnas.nama as nama_wna',
-        )
+        'wisatawan_wnas.nama as nama_wna')
         ->where('id_transaksi', $id_transaksi)
         ->get();
 

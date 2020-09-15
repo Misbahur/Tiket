@@ -4,6 +4,7 @@
 <div class="block-header">
     <h2>TRANSAKSI OFFLINE</h2>
     <hr>
+    @include('components.notifikasi')
 </div>
 <div class="row clearfix" id="app1">
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -35,7 +36,7 @@
                 <div class="row">
                     @foreach($offline as $i => $data) 
                     
-                    <div class="col-lg-5 col-md- col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="info-box <?php echo $desain["$data->kode"]["color"]; ?> hover-zoom-effect">
                             <div class="icon">
                                 <i class="material-icons"><?php echo $desain["$data->kode"]["icon"]; ?></i>
@@ -102,9 +103,11 @@
                             <label class="col-md-4 control-label">Kuantitas: &nbsp;&nbsp;&nbsp;&nbsp; << kuantitas >></label>
                             
                             <div v-for="element in elements">
-                                <input name="dataKuantitas_index[]" type="hidden" :value="element.index" />
+                                <input name="id_data_tiket[]" type="hidden" :value="element.index" />
                                 <input name="jumlahTiket[]" type="hidden" :value="element.tiket" />
                                 <input name="hargaTiket[]" type="hidden" :value="element.harga" />
+                                <input name="id_user" type="hidden" value="{{ Auth::user()->id }}">
+                                <input name="tanggal_berkunjung" type="hidden" value="{{date("Y-m-d")}}">
                             </div>
                             <div class="col-md-8">
                                 {{-- <input type="hidden" id="nominal" name="nominal" class="form-control"> --}}

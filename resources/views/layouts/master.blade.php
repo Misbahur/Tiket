@@ -110,8 +110,138 @@
                 </div>
             </div>
             <!-- #User Info -->
-            <!-- Menu -->
+            @if (Auth::user()->level_user=='it')
+                <!-- Menu -->
             <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="activ">
+                    <a href="{{url('/dashboard')}}">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('/datatiket')}}">
+                            <i class="material-icons">menu</i>
+                            <span>Data Tiket</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('/users')}}">
+                            <i class="material-icons">accessibility</i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            @endif
+            @if (Auth::user()->level_user=='kepala')
+                <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="activ">
+                    <a href="{{url('/dashboard')}}">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('/laporan')}}">
+                            <i class="material-icons">description</i>
+                            <span>Laporan</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            @endif
+            @if (Auth::user()->level_user=='koordinator')
+              <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="activ">
+                    <a href="{{url('/dashboard')}}">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('/laporan')}}">
+                            <i class="material-icons">description</i>
+                            <span>Laporan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">store</i>
+                            <span>Penjualan</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{('/online')}}">
+                                <i class="material-icons">credit_card</i>
+                                    <span>Online</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{url('/offline')}}">
+                                <i class="material-icons">shopping_cart</i>
+                                    <span>Offline</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->  
+            @endif
+            @if (Auth::user()->level_user=='petugas')
+                <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="activ">
+                    <a href="{{url('/dashboard')}}">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('/laporan')}}">
+                            <i class="material-icons">description</i>
+                            <span>Laporan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">store</i>
+                            <span>Penjualan</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{{('/online')}}">
+                                <i class="material-icons">credit_card</i>
+                                    <span>Online</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{url('/offline')}}">
+                                <i class="material-icons">shopping_cart</i>
+                                    <span>Offline</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            @endif
+            <!-- Menu -->
+            {{-- <div class="menu">
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="activ">
@@ -159,7 +289,7 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
             <!-- #Menu -->
             <!-- Footer -->
             <div class="legal">
@@ -173,98 +303,6 @@
             <!-- #Footer -->
         </aside>
         <!-- #END# Left Sidebar -->
-        <!-- Right Sidebar -->
-        <aside id="rightsidebar" class="right-sidebar">
-            <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
-            </ul>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
-                    <ul class="demo-choose-skin">
-                        <li data-theme="red" class="active">
-                            <div class="red"></div>
-                            <span>Red</span>
-                        </li>
-                        <li data-theme="pink">
-                            <div class="pink"></div>
-                            <span>Pink</span>
-                        </li>
-                        <li data-theme="purple">
-                            <div class="purple"></div>
-                            <span>Purple</span>
-                        </li>
-                        <li data-theme="deep-purple">
-                            <div class="deep-purple"></div>
-                            <span>Deep Purple</span>
-                        </li>
-                        <li data-theme="indigo">
-                            <div class="indigo"></div>
-                            <span>Indigo</span>
-                        </li>
-                        <li data-theme="blue">
-                            <div class="blue"></div>
-                            <span>Blue</span>
-                        </li>
-                        <li data-theme="light-blue">
-                            <div class="light-blue"></div>
-                            <span>Light Blue</span>
-                        </li>
-                        <li data-theme="cyan">
-                            <div class="cyan"></div>
-                            <span>Cyan</span>
-                        </li>
-                        <li data-theme="teal">
-                            <div class="teal"></div>
-                            <span>Teal</span>
-                        </li>
-                        <li data-theme="green">
-                            <div class="green"></div>
-                            <span>Green</span>
-                        </li>
-                        <li data-theme="light-green">
-                            <div class="light-green"></div>
-                            <span>Light Green</span>
-                        </li>
-                        <li data-theme="lime">
-                            <div class="lime"></div>
-                            <span>Lime</span>
-                        </li>
-                        <li data-theme="yellow">
-                            <div class="yellow"></div>
-                            <span>Yellow</span>
-                        </li>
-                        <li data-theme="amber">
-                            <div class="amber"></div>
-                            <span>Amber</span>
-                        </li>
-                        <li data-theme="orange">
-                            <div class="orange"></div>
-                            <span>Orange</span>
-                        </li>
-                        <li data-theme="deep-orange">
-                            <div class="deep-orange"></div>
-                            <span>Deep Orange</span>
-                        </li>
-                        <li data-theme="brown">
-                            <div class="brown"></div>
-                            <span>Brown</span>
-                        </li>
-                        <li data-theme="grey">
-                            <div class="grey"></div>
-                            <span>Grey</span>
-                        </li>
-                        <li data-theme="blue-grey">
-                            <div class="blue-grey"></div>
-                            <span>Blue Grey</span>
-                        </li>
-                        <li data-theme="black">
-                            <div class="black"></div>
-                            <span>Black</span>
-                        </li>
-                    </ul>
-            </div>
-        </aside>
-        <!-- #END# Right Sidebar -->
     </section>
 
     <section class="content">
@@ -293,9 +331,6 @@
     <script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('plugins/morrisjs/morris.js') }}"></script>
 
-    <!-- ChartJs -->
-    <script src="{{ asset('plugins/chartjs/Chart.bundle.js') }}"></script>
-
     <!-- Flot Charts Plugin Js -->
     {{-- <script src="{{ asset('plugins/flot-charts/jquery.flot.js') }}"></script>
     <script src="{{ asset('plugins/flot-charts/jquery.flot.resize.js') }}"></script>
@@ -310,8 +345,6 @@
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/pages/index.js') }}"></script>
 
-    <!-- Demo Js -->
-    <script src="{{ asset('js/demo.js') }}"></script>
 </body>
 
 </html>

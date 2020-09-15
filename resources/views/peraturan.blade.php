@@ -178,13 +178,13 @@
                             <div>
                                 <!-- Material unchecked -->
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="materialUnchecked">
+                                    <input type="checkbox" id="checkme" class="form-check-input" id="materialUnchecked">
                                     <label class="form-check-label" for="materialUnchecked">Menunjukan Bukti Transfer Pemesanan Tiket Elektronik Wisata Taman Nasional Baluran *</label>
                                 </div>
                             </div>
                             <div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="materialUnchecked">
+                                    <input type="checkbox" id="checkme1" class="form-check-input" id="materialUnchecked">
                                     <label class="form-check-label" for="materialUnchecked">Membawa kartu tanda pengenal (ktp/ktm), dan Paspor yang masih berlaku (Khusus Wisata Mancanegara/Wisman).</label>
                                 </div>
                             </div>
@@ -219,7 +219,7 @@
               <i>Anda memahami, menyetujui, syarat dan ketentuan-ketentuan di atas, silakan isi checklist persyaratan diatas dan klik menu daftar</i>
               <div class="paddingtop-20">
               <a href="tanggal">
-                <button type="button" class="btn btn-primary">Pesan Tiket</button>
+                <button type="button" id="buttonenable" class="btn btn-primary" disabled="disabled">Pesan Tiket</button>
               </a>
               </div>
             </div>
@@ -228,5 +228,19 @@
         </div>
        </div>
     </section>
+    <script>
+    var checker = document.getElementById('checkme');
+    var checker = document.getElementById('checkme1');
+    var sendbtn = document.getElementById('buttonenable');
+    // when unchecked or checked, run the function
+    checker.onchange = function(){
+    if(this.checked){
+        sendbtn.disabled = false;
+    } else {
+        sendbtn.disabled = true;
+    }
+
+    }
+    </script>
     <!-- /Section: boxes -->
 @endsection

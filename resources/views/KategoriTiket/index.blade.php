@@ -34,9 +34,9 @@
                                             <td>{{ ++$i }}</td>
                                             <td>{{$data->kode}}</td>
                                             <td>{{$data->nama}}</td>
-                                            <td>{{$data->harga}}</td>
+                                            <td>Rp.{{number_format($data->harga)}}</td>
                                             <td>{{$data->kategori_hari}}</td>
-                                            <td>{{$data->asuransi}}</td>
+                                            <td>Rp.{{number_format($data->asuransi)}}</td>
                                             <td>
                                             <form action="{{ route('datatiket.destroy',$data->id) }}" method="POST">
                                                 <a class="btn btn-info btn-sm" href="{{ route('datatiket.edit',$data->id) }}">

@@ -1,4 +1,3 @@
-
 {{-- Isi berbagai notifikasi --}}
 <div class="container row">
     <div class="col-8">

@@ -69,7 +69,7 @@
         <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
           <ul class="nav navbar-nav">
             <li class="{{ Request::segment(1) === '/' ? 'active' : null }}"><a href="/">Home</a></li>
-            <li class="{{ Request::segment(1) === 'pembayaran' ? 'active' : null }}"><a href="#">Pembayaran</a></li>
+            <li class="{{ Request::segment(1) === 'pembayaran' ? 'active' : null }}"><a href="pembayaran">Pembayaran</a></li>
             <li class="{{ Request::segment(1) === 'panduan' ? 'active' : null }}"><a href="panduan">Panduan Pemesanan</a></li>
             {{-- <li class="{{ Request::segment(1) === 'login' ? 'active' : null }}"><a href="{{ route('login') }}">Admin</a></li> --}}
             <li style="padding-top: 8px">

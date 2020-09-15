@@ -26,6 +26,9 @@ Route::get('/peraturan', function () {
 Route::get('/tanggal', function(){
     return view('tanggal');
 });
+Route::get('/pembayaran', function(){
+    return view('pembayaran');
+});
 Route::get('status', 'TransaksiOnlineController@edit')->name('status');
 Route::POST('/buktiup','TransaksiOnlineController@update')->name('buktiup');
 Route::get('/pemesanan','PemesananController@create');
@@ -33,6 +36,8 @@ Route::post('/otransaksi', 'TransaksiOnlineController@store');
 
 Route::get('/wilayah/{provinsi}','WilayahController@kota');
 //Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/kirimemail','SendEmailController@index');
+Route::get('/sendemail/{id}','SendEmailController@edit');
 
 
 //auth

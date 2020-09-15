@@ -43,7 +43,7 @@
                                                 <i class="fa fa-eye"></i>
                                                 Show
                                                 </a>
-                                                <a class="btn btn-success btn-sm" href="{{url("online/{$data->id}/edit")}}">
+                                                <a class="btn btn-success btn-sm" href="{{url("sendemail/$data->id")}}">
                                                 <i class="fas fa-pencil-alt"></i>
                                                 Verifikasi
                                                 </a>
